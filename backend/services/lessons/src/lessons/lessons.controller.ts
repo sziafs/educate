@@ -8,22 +8,24 @@ import {
   HttpException,
 } from '@nestjs/common';
 import { LessonsService } from './lessons.service';
+import { EventPattern, MessagePattern } from '@nestjs/microservices';
+import { UpdateLessonEvent } from './events/update-lesson-event';
 
 @Controller('lessons')
 export class LessonsController {
-  private logger = new Logger(LessonsController.name);
-
   constructor(private readonly lessonsService: LessonsService) {}
 
-  @Get()
-  async findAll() {
-    try {
-      return await this.lessonsService.findAll();
-    } catch (err) {
-      this.logger.error(`Failed to find all lessons: ${err}`);
-      throw new HttpException(err?.code ?? err?.name ?? `${err}`, 400);
-    }
-  }
+  private logger = new Logger(LessonsController.name);
+
+  // @Get()
+  // async findAll() {
+  //   try {
+  //     return await this.lessonsService.findAll();
+  //   } catch (err) {
+  //     this.logger.error(`Failed to find all lessons: ${err}`);
+  //     throw new HttpException(err?.code ?? err?.name ?? `${err}`, 400);
+  //   }
+  // }
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
@@ -33,6 +35,16 @@ export class LessonsController {
       this.logger.error(`Failed to find lesson: ${err}`);
       throw new HttpException(err?.code ?? err?.name ?? `${err}`, 400);
     }
+  }
+
+  @EventPattern('lesson_updated')
+  handleLessonUpdate(data: UpdateLessonEvent) {
+    this.lessonsService.handleLessonUpdate(data);
+  }
+
+  @MessagePattern({ cmd: 'get_lessons' })
+  findAll() {
+    return this.lessonsService.findAll();
   }
 
   @Patch(':id')

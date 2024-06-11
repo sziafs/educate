@@ -1,10 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { LessonSchema, LessonType } from './schemas/types';
+import { UpdateLessonEvent } from './events/update-lesson-event';
 
 @Injectable()
 export class LessonsService {
   constructor(private readonly prismaService: PrismaService) {}
+
+  handleLessonUpdate(data: UpdateLessonEvent) {
+    console.log('handleLessonUpdate - COMMUNICATIONS', data);
+  }
 
   async findAll() {
     return await this.prismaService.lesson.findMany({

@@ -1,8 +1,6 @@
 import { INestApplication, Injectable, OnModuleInit } from '@nestjs/common';
 import { Prisma, PrismaClient } from '@prisma/client';
 
-import { hooks as userHooks } from './hooks/user';
-
 @Injectable()
 export class PrismaService
   extends PrismaClient<
@@ -28,7 +26,6 @@ export class PrismaService
   async onModuleInit() {
     await this.$connect();
     this.$use((params, next) => {
-      userHooks.forEach((fn) => fn(params));
       return next(params);
     });
   }
