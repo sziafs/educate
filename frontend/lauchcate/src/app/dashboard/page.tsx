@@ -3,22 +3,19 @@ import Sidebar from '../sidebar';
 
 interface CourseCardProps {
   programNumber: number;
+  programTitle: string;
   imageUrl: string;
 }
 
-const CourseCard: React.FC<CourseCardProps> = ({ programNumber, imageUrl }) => {
-  const defaultImage = '/default.jpeg';
-
+const CourseCard: React.FC<CourseCardProps> = ({ programNumber, programTitle, imageUrl }) => {
   return (
     <Link href={`/course/${programNumber}`}>
-      <div className="p-4 border border-gray-200 rounded-lg">
+      <div className="p-4 border border-gray-600 rounded-lg">
+      <p className="text-gray-300 text-sm font-bold mb-2">{programTitle}</p>
         <div
           className="bg-cover bg-center h-64 rounded-lg"
-          style={{ backgroundImage: `url(${imageUrl || defaultImage})` }}
         >
-          <div className="h-full flex items-end bg-black bg-opacity-50 p-4 rounded-b-lg">
-            <h2 className="text-white text-2xl font-bold">Program {programNumber}</h2>
-          </div>
+          <div className="h-full rounded-lg bg-gray-400"/>
         </div>
       </div>
     </Link>
@@ -37,10 +34,10 @@ export default function Page() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           <div className="md:col-span-2">
-            <CourseCard programNumber={1} imageUrl="/course1.jpg" />
+            <CourseCard programNumber={1} programTitle="What's new" imageUrl="/course1.jpg" />
           </div>
-          <CourseCard programNumber={2} imageUrl="/course2.jpg" />
-          <CourseCard programNumber={3} imageUrl="/course3.jpg" />
+          <CourseCard programNumber={2} programTitle="Your program" imageUrl="/course2.jpg" />
+          <CourseCard programNumber={3} programTitle="Connect with students" imageUrl="/course3.jpg" />
         </div>
       </div>
     </div>
