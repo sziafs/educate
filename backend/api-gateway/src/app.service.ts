@@ -8,7 +8,7 @@ export class AppService {
     @Inject('COMMUNICATION') private readonly communicationClient: ClientProxy,
   ) {}
 
-  findAllLessons() {
+  getAllLessons() {
     return this.communicationClient.send({ cmd: 'get_lessons' }, {});
   }
 

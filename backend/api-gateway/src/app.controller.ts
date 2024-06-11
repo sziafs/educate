@@ -7,6 +7,11 @@ export class AppController {
 
   private logger = new Logger(AppController.name);
 
+  @Get('lessons')
+  getAllLessons() {
+    return this.appService.getAllLessons();
+  }
+
   @Patch(':id')
   updateLesson() {
     try {
@@ -15,11 +20,6 @@ export class AppController {
       this.logger.error(`Failed to update lesson: ${err}`);
       throw new HttpException(err?.code ?? err?.name ?? `${err}`, 400);
     }
-  }
-
-  @Get('lessons')
-  findAllLessons() {
-    return this.appService.findAllLessons();
   }
 
   @Get('courses')

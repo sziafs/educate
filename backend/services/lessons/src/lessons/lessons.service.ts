@@ -11,8 +11,8 @@ export class LessonsService {
     console.log('handleLessonUpdate - COMMUNICATIONS', data);
   }
 
-  async findAll() {
-    return await this.prismaService.lesson.findMany({
+  handleGetAll() {
+    return this.prismaService.lesson.findMany({
       orderBy: {
         title: 'desc',
       },

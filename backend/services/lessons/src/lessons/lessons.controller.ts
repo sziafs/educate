@@ -17,16 +17,6 @@ export class LessonsController {
 
   private logger = new Logger(LessonsController.name);
 
-  // @Get()
-  // async findAll() {
-  //   try {
-  //     return await this.lessonsService.findAll();
-  //   } catch (err) {
-  //     this.logger.error(`Failed to find all lessons: ${err}`);
-  //     throw new HttpException(err?.code ?? err?.name ?? `${err}`, 400);
-  //   }
-  // }
-
   @Get(':id')
   async findOne(@Param('id') id: string) {
     try {
@@ -43,8 +33,8 @@ export class LessonsController {
   }
 
   @MessagePattern({ cmd: 'get_lessons' })
-  findAll() {
-    return this.lessonsService.findAll();
+  handleGetAll() {
+    return this.lessonsService.handleGetAll();
   }
 
   @Patch(':id')
