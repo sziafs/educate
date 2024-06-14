@@ -7,13 +7,13 @@ TBC: Mobile App built on React Native.
 
 ### Frontend
 
-The frontend client is built using Next.js, a popular React framework for building user interfaces. It communicates with two microservices, `lessons` and `courses`, which are built using NestJS, a progressive Node.js framework for building efficient and scalable server-side applications.
+The frontend client is built using Next.js, a popular React framework for building user interfaces. Access it here [Frontend App](https://educate-z5y4.vercel.app/)
 
 ## API Gateway
 
 The API Gateway is the entry point for clients to interact with the microservices. It handles client requests by routing them to the appropriate microservice. The API Gateway also aggregates the responses from the microservices and returns them to the client. This decouples the client from the microservices, allowing them to evolve independently. 
 
-For more details, see the [API Gateway README](./path/to/api-gateway/README.md).
+For more details, see the [API Gateway README](./backend/api-gateway/README.md).
 
 ## Microsservices
 TBC: Two more microservices (programs and modules).
